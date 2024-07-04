@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+/* @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
@@ -13,6 +14,17 @@ module.exports = {
         "pure-white": "#FFFFFF",
         green: "#26D782",
         red: "#EE5454",
+      },
+      fontFamily: {
+        rubik: ["Rubik", ...defaultTheme.fontFamily.sans],
+      },
+      fontSize: {
+        display: ["144px", { lineHeight: "1" }],
+        headingL: ["64px", { lineHeight: "1" }],
+        headingM: ["36px", { lineHeight: "1" }],
+        headingS: ["28px", { lineHeight: "1" }],
+        bodyM: ["12px", { lineHeight: "1.5" }],
+        bodyS: ["12px", { lineHeight: "1.5"}],
       },
     },
     plugins: [],
