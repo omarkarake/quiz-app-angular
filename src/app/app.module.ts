@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { StarterComponent } from './starter/starter.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { ButtonComponent } from './button/button.component';
+import { ScoreComponent } from './score/score.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ButtonComponent } from './button/button.component';
     StarterComponent,
     QuestionsComponent,
     ButtonComponent,
+    ScoreComponent,
   ],
   imports: [
     BrowserModule,
