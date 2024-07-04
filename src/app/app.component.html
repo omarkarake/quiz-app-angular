@@ -3,16 +3,20 @@
 >
   <div
     [ngClass]="{
-      'image-bg-dark-desktop': isDarkMode,
-      'image-bg-light-desktop': !isDarkMode,
+      'image-bg-dark-desktop': isDarkMode && screenSize === 'lg',
+      'image-bg-light-desktop': !isDarkMode && screenSize === 'lg',
+      'image-bg-dark-tablet': isDarkMode && screenSize === 'md',
+      'image-bg-light-tablet': !isDarkMode && screenSize === 'md',
+      'image-bg-dark-mobile': isDarkMode && screenSize === 'sm',
+      'image-bg-light-mobile': !isDarkMode && screenSize === 'sm'
     }"
     class="px-6 md:px-[64px] lg:px-[140px]"
   >
-    <app-header />
+    <app-header></app-header>
     <!-- <app-starter /> -->
     <!-- <app-questions /> -->
     <!-- <app-button /> -->
-    <app-score />
+    <app-score></app-score>
     <!-- <router-outlet></router-outlet> -->
   </div>
 </div>

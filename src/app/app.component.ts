@@ -1,5 +1,5 @@
 // src/app/app.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DarkModeService } from './dark-mode.service';
@@ -12,6 +12,7 @@ import { DarkModeService } from './dark-mode.service';
 export class AppComponent implements OnInit {
   title = 'quiz-app';
   isDarkMode = false;
+  screenSize: 'lg' | 'md' | 'sm' = 'sm'; // Initialize with a default value
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -54,5 +55,27 @@ export class AppComponent implements OnInit {
       this.isDarkMode = isDarkMode;
       // You can apply dark mode changes to the app here if needed
     });
+
+    // Determine initial screen size
+    this.updateScreenSize();
+
+    // Listen to window resize events
+    window.addEventListener('resize', this.updateScreenSize.bind(this));
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.updateScreenSize();
+  }
+
+  updateScreenSize() {
+    const width = window.innerWidth;
+    if (width >= 1024) {
+      this.screenSize = 'lg';
+    } else if (width >= 768 && width < 1024) {
+      this.screenSize = 'md';
+    } else {
+      this.screenSize = 'sm';
+    }
   }
 }
