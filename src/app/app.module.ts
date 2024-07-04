@@ -3,6 +3,7 @@ import {
   BrowserModule,
   provideClientHydration,
 } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,10 +13,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { StarterComponent } from './starter/starter.component';
+import { QuestionsComponent } from './questions/questions.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, StarterComponent],
-  imports: [BrowserModule, AppRoutingModule, MatIconModule, HttpClientModule],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    StarterComponent,
+    QuestionsComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatIconModule,
+    HttpClientModule,
+    FormsModule,
+  ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })

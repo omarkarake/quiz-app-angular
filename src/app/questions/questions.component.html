@@ -1,0 +1,102 @@
+<div class="mt-[32px] lg:mt-[99px] lg:flex lg:justify-between">
+  <div class="flex flex-col gap-4">
+    <div>
+      <p
+        class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish"
+      >
+        Question 6 of 10
+      </p>
+    </div>
+    <div>
+      <p
+        class="text-[20px] mt-3 md:text-headingL font-medium text-dark-navy dark:text-pure-white"
+      >
+        Which of these color contrast ratios defines the minimum WCAG 2.1 Level
+        AA requirement for normal text?
+      </p>
+    </div>
+    <div class="w-full mt-6">
+      <!-- <div class="mb-4">
+          <label for="rangeInput" class="block text-sm font-medium text-gray-700">Enter Range Value (0-100):</label>
+          <input
+            type="number"
+            id="rangeInput"
+            min="0"
+            max="100"
+            [(ngModel)]="rangeValue"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            (input)="updateRangeBar()"
+          />
+        </div> -->
+      <div
+        class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full"
+      >
+        <div
+          [style.width.%]="rangeValue"
+          class="range-fill bg-purple rounded"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div class="lg:w-[50%] flex flex-col gap-6 mt-16 lg:mt-0">
+    <div
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+    >
+      <div
+        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+      >
+        <p class="text-[18px] text-grey-navy font-normal">A</p>
+      </div>
+      <div>
+        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
+          4.5 : 1
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+    >
+      <div
+        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+      >
+        <p class="text-[18px] text-grey-navy font-normal">B</p>
+      </div>
+      <div>
+        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
+          3 : 1
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+    >
+      <div
+        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+      >
+        <p class="text-[18px] text-grey-navy font-normal">C</p>
+      </div>
+      <div>
+        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
+          2.5 : 1
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+    >
+      <div
+        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+      >
+        <p class="text-[18px] text-grey-navy font-normal">D</p>
+      </div>
+      <div>
+        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
+          5 : 1
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

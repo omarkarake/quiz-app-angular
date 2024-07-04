@@ -1,0 +1,10 @@
+.range-bar {
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 4px;
+}
+.range-fill {
+  height: 8px;
+}
