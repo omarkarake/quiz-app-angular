@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { StarterComponent } from './starter/starter.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { QuestionsComponent } from './questions/questions.component';
     HeaderComponent,
     StarterComponent,
     QuestionsComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
