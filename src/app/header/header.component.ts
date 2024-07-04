@@ -1,4 +1,6 @@
+// src/app/header/header.component.ts
 import { Component, OnInit } from '@angular/core';
+import { DarkModeService } from '../dark-mode.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   isDarkMode = false;
 
+  constructor(private darkModeService: DarkModeService) {}
+
   ngOnInit(): void {
+    // Subscribe to dark mode changes
+    this.darkModeService.darkMode$.subscribe(isDarkMode => {
+      this.isDarkMode = isDarkMode;
+      this.applyDarkMode(this.isDarkMode);
+    });
+
     // Check initial system preference
     this.checkSystemDarkMode();
 
@@ -20,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;
-    this.applyDarkMode(this.isDarkMode);
+    this.darkModeService.setDarkMode(this.isDarkMode);
   }
 
   private checkSystemDarkMode(event?: MediaQueryListEvent): void {
@@ -28,7 +38,7 @@ export class HeaderComponent implements OnInit {
       '(prefers-color-scheme: dark)'
     ).matches;
     this.isDarkMode = event ? event.matches : prefersDarkMode;
-    this.applyDarkMode(this.isDarkMode);
+    this.darkModeService.setDarkMode(this.isDarkMode);
   }
 
   private applyDarkMode(isDarkMode: boolean): void {
