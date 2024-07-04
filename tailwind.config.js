@@ -1,8 +1,9 @@
 /* @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
+  mode: "jit",
   content: ["./src/**/*.{html,ts}"],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -25,7 +26,7 @@ module.exports = {
         headingM: ["36px", { lineHeight: "1" }],
         headingS: ["28px", { lineHeight: "1" }],
         bodyM: ["12px", { lineHeight: "1.5" }],
-        bodyS: ["12px", { lineHeight: "1.5"}],
+        bodyS: ["12px", { lineHeight: "1.5" }],
       },
     },
     plugins: [],

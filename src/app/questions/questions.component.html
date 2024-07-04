@@ -39,13 +39,22 @@
     </div>
   </div>
   <div class="lg:w-[50%] flex flex-col gap-6 mt-16 lg:mt-0">
+    <!-- Selection hover effect on question -->
     <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl cursor-pointer"
+      (mouseover)="isHovered = true"
+      (mouseout)="isHovered = false"
     >
       <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+        [ngClass]="{ 'bg-[#F6E7FF]': isHovered, 'bg-light-grey': !isHovered }"
+        class="w-10 h-10 md:w-14 md:h-14 rounded-lg flex justify-center items-center"
       >
-        <p class="text-[18px] text-grey-navy font-normal">A</p>
+        <p
+          [class.text-purple]="isHovered"
+          class="text-[18px] text-grey-navy font-normal"
+        >
+          A
+        </p>
       </div>
       <div>
         <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
@@ -54,13 +63,14 @@
       </div>
     </div>
 
+    <!-- Selection active question -->
     <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl border-purple border-[3px]"
     >
       <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+        class="w-10 h-10 md:w-14 md:h-14 bg-purple rounded-lg flex justify-center items-center"
       >
-        <p class="text-[18px] text-grey-navy font-normal">B</p>
+        <p class="text-[18px] text-pure-white font-normal">B</p>
       </div>
       <div>
         <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
@@ -68,24 +78,59 @@
         </p>
       </div>
     </div>
-
+    <!-- Correct answer -->
     <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+      class="flex justify-between items-center bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS px-3 rounded-3xl"
     >
-      <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
-      >
-        <p class="text-[18px] text-grey-navy font-normal">C</p>
+      <div class="flex items-center gap-4">
+        <div
+          class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+        >
+          <p class="text-[18px] text-grey-navy font-normal">C</p>
+        </div>
+        <div>
+          <p
+            class="font-medium text-[18px] text-dark-navy dark:text-pure-white"
+          >
+            2.5 : 1
+          </p>
+        </div>
       </div>
       <div>
-        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
-          2.5 : 1
-        </p>
+        <mat-icon svgIcon="icon-correct"></mat-icon>
       </div>
     </div>
 
     <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md"
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl"
+    >
+      <div
+        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+      >
+        <p class="text-[18px] text-grey-navy font-normal">D</p>
+      </div>
+      <div>
+        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
+          5 : 1
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl"
+    >
+      <div
+        class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
+      >
+        <p class="text-[18px] text-grey-navy font-normal">D</p>
+      </div>
+      <div>
+        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
+          5 : 1
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl"
     >
       <div
         class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
