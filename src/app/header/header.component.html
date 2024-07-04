@@ -1,24 +1,35 @@
-    <div class="flex justify-between items-center pt-[26px] md:pt-[40px]">
-      <div class="flex items-center gap-4 lg:gap-6">
-        <div class="w-14 h-14 bg-[#F6E7FF] rounded-lg flex justify-center items-center">
-          <mat-icon svgIcon="icon-accessibility"></mat-icon>
-        </div>
-        <div>
-          <p class="text-[18px] md:text-headingS text-dark-navy dark:text-pure-white">
-            Accessibility
-          </p>
-        </div>
-      </div>
-      <div class="w-32 h-7 flex justify-between items-center">
-        <div class="w-12 h-auto flex flex-col justify-center">
-          <mat-icon svgIcon="icon-sun-dark"></mat-icon>
-        </div>
-        <div [ngClass]="{'pr-1 items-end': isDarkMode, 'pl-1': !isDarkMode}" class="w-14 h-full bg-purple rounded-full flex flex-col justify-center">
-          <div class="w-5 h-5 bg-pure-white rounded-full cursor-pointer" (click)="toggleDarkMode()"></div>
-        </div>
-        <div class="w-12 h-auto flex flex-col justify-center items-end">
-          <mat-icon svgIcon="icon-moon-dark"></mat-icon>
-        </div>
-      </div>
+<div class="flex justify-between items-center pt-[26px] md:pt-[40px]">
+  <div class="flex items-center gap-4 lg:gap-6">
+    <div
+      class="w-14 h-14 bg-[#F6E7FF] rounded-lg flex justify-center items-center"
+    >
+      <mat-icon svgIcon="icon-accessibility"></mat-icon>
     </div>
-  
+    <div>
+      <p
+        class="text-[18px] md:text-headingS text-dark-navy dark:text-pure-white"
+      >
+        Accessibility
+      </p>
+    </div>
+  </div>
+  <div class="w-32 h-7 flex justify-between items-center">
+    <div class="w-12 h-auto flex flex-col justify-center">
+      <mat-icon *ngIf="!isDarkMode" svgIcon="icon-sun-dark"></mat-icon>
+      <mat-icon *ngIf="isDarkMode" svgIcon="icon-sun-light"></mat-icon>
+    </div>
+    <div
+      [ngClass]="{ 'pr-1 items-end': isDarkMode, 'pl-1': !isDarkMode }"
+      class="w-14 h-full bg-purple rounded-full flex flex-col justify-center"
+    >
+      <div
+        class="w-5 h-5 bg-pure-white rounded-full cursor-pointer"
+        (click)="toggleDarkMode()"
+      ></div>
+    </div>
+    <div class="w-12 h-auto flex flex-col justify-center items-end">
+      <mat-icon *ngIf="!isDarkMode" svgIcon="icon-moon-dark"></mat-icon>
+      <mat-icon *ngIf="isDarkMode" svgIcon="icon-moon-light"></mat-icon>
+    </div>
+  </div>
+</div>
