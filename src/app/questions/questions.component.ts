@@ -19,7 +19,6 @@ interface Quiz {
 export class QuestionsComponent implements OnInit {
   @Input() quiz: Quiz | null = null;
   currentQuestionIndex = 0;
-  rangeValue: number = 30;
   hoveredOption: number | null = null;
   selectedOption: number | null = null;
   showError: boolean = false;
@@ -32,8 +31,9 @@ export class QuestionsComponent implements OnInit {
     }
   }
 
-  updateRangeBar(): void {
-    this.rangeValue = Math.min(Math.max(this.rangeValue, 0), 100); // Ensure value is within 0-100
+  get rangeValue(): number {
+    const totalQuestions = this.quiz?.questions?.length ?? 1;
+    return ((this.currentQuestionIndex / totalQuestions) * 100) + 10;
   }
 
   getCurrentQuestion(): Question | null {
@@ -57,7 +57,9 @@ export class QuestionsComponent implements OnInit {
     } else {
       const currentQuestion = this.getCurrentQuestion();
       if (currentQuestion) {
-        this.isAnswerCorrect = currentQuestion.options[this.selectedOption] === currentQuestion.answer;
+        this.isAnswerCorrect =
+          currentQuestion.options[this.selectedOption] ===
+          currentQuestion.answer;
         this.showFeedback = true;
       }
     }
@@ -77,6 +79,8 @@ export class QuestionsComponent implements OnInit {
 
   isCorrectOption(index: number): boolean {
     const currentQuestion = this.getCurrentQuestion();
-    return currentQuestion ? currentQuestion.options[index] === currentQuestion.answer : false;
+    return currentQuestion
+      ? currentQuestion.options[index] === currentQuestion.answer
+      : false;
   }
 }
