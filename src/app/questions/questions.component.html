@@ -1,18 +1,28 @@
 <div class="mt-[32px] lg:mt-[99px] lg:flex lg:justify-between">
   <div class="lg:w-[40%] flex flex-col gap-4">
     <div>
-      <p class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish">
-        Question {{ currentQuestionIndex + 1 }} of {{ quiz?.questions?.length ?? 0 }}
+      <p
+        class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish"
+      >
+        Question {{ currentQuestionIndex + 1 }} of
+        {{ quiz?.questions?.length ?? 0 }}
       </p>
     </div>
     <div>
-      <p class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white">
-        {{ getCurrentQuestion()?.question ?? '' }}
+      <p
+        class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white"
+      >
+        {{ getCurrentQuestion()?.question ?? "" }}
       </p>
     </div>
     <div class="w-full mt-6">
-      <div class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full">
-        <div [style.width.%]="rangeValue" class="range-fill bg-purple rounded"></div>
+      <div
+        class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full"
+      >
+        <div
+          [style.width.%]="rangeValue"
+          class="range-fill bg-purple rounded"
+        ></div>
       </div>
     </div>
   </div>
@@ -25,8 +35,10 @@
       [ngClass]="{
         'border-purple border-[3px]': selectedOption === i,
         'border-green': showFeedback && isCorrectOption(i),
-        'border-red': showFeedback && selectedOption === i && !isCorrectOption(i),
-        'border-none': selectedOption !== i && !(showFeedback && isCorrectOption(i))
+        'border-red':
+          showFeedback && selectedOption === i && !isCorrectOption(i),
+        'border-none':
+          selectedOption !== i && !(showFeedback && isCorrectOption(i))
       }"
       (click)="selectOption(i)"
     >
@@ -44,7 +56,9 @@
           [class.text-purple]="hoveredOption === i && selectedOption !== i"
           [class.text-pure-white]="selectedOption === i"
           [class.text-pure-white]="showFeedback && isCorrectOption(i)"
-          [class.text-pure-white]="showFeedback && selectedOption === i && !isCorrectOption(i)"
+          [class.text-pure-white]="
+            showFeedback && selectedOption === i && !isCorrectOption(i)
+          "
           class="text-[18px] text-grey-navy font-normal"
         >
           {{ getOptionLabel(i) }}
@@ -76,7 +90,9 @@
     </p>
   </div>
   <div
-    *ngIf="showFeedback && currentQuestionIndex < (quiz?.questions?.length ?? 0) - 1"
+    *ngIf="
+      showFeedback && currentQuestionIndex < (quiz?.questions?.length ?? 0) - 1
+    "
     class="min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
     (click)="nextQuestion()"
   >
@@ -86,7 +102,10 @@
   </div>
 </div>
 
-<div *ngIf="showError" class="flex justify-center items-center gap-2 mt-3 md:mt-[34px]">
+<div
+  *ngIf="showError"
+  class="flex justify-center items-center gap-2 mt-3 md:mt-[34px]"
+>
   <div class="flex justify-center items-center">
     <mat-icon svgIcon="icon-incorrect"></mat-icon>
   </div>
