@@ -23,6 +23,7 @@ export class QuestionsComponent implements OnInit {
   isHovered: boolean = false;
   hoveredOption: number | null = null;
   selectedOption: number | null = null;
+  showError: boolean = false;
 
   ngOnInit() {
     if (this.quiz && this.quiz.questions.length > 0) {
@@ -47,5 +48,30 @@ export class QuestionsComponent implements OnInit {
 
   selectOption(index: number): void {
     this.selectedOption = index;
+    this.showError = false; // Hide error when an option is selected
+  }
+
+  submitAnswer(): void {
+    if (this.selectedOption === null) {
+      this.showError = true;
+    } else {
+      // Handle answer submission logic here, e.g., check if the answer is correct
+      if (this.currentQuestionIndex < this.quiz!.questions.length - 1) {
+        this.nextQuestion();
+      } else {
+        console.log('End of quiz, handle final submission');
+        // Handle end of quiz logic here
+      }
+    }
+  }
+
+  nextQuestion(): void {
+    if (this.selectedOption === null) {
+      this.showError = true;
+    } else {
+      this.currentQuestionIndex++;
+      this.selectedOption = null;
+      this.showError = false;
+    }
   }
 }
