@@ -94,10 +94,10 @@
   </div>
 </div>
 
-<div class="mt-6 flex gap-4">
+<div class="mt-6 flex gap-4 lg:justify-end">
   <div
     *ngIf="!showFeedback"
-    class="w-[100%] min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
+    class="w-[100%] lg:w-[50%] min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
     (click)="submitAnswer()"
   >
     <p class="text-pure-white text-[18px] md:text-headingS font-medium">
@@ -108,7 +108,7 @@
     *ngIf="
       showFeedback && currentQuestionIndex < (quiz?.questions?.length ?? 0) - 1
     "
-    class="w-[100%] min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
+    class="w-[100%] lg:w-[50%] min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
     (click)="nextQuestion()"
   >
     <p class="text-pure-white text-[18px] md:text-headingS font-medium">
