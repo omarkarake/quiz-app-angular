@@ -24,7 +24,9 @@
       class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl cursor-pointer"
       [ngClass]="{
         'border-purple border-[3px]': selectedOption === i,
-        'border-none': selectedOption !== i
+        'border-green': showFeedback && isCorrectOption(i),
+        'border-red': showFeedback && selectedOption === i && !isCorrectOption(i),
+        'border-none': selectedOption !== i && !(showFeedback && isCorrectOption(i))
       }"
       (click)="selectOption(i)"
     >
@@ -32,13 +34,17 @@
         [ngClass]="{
           'bg-[#F6E7FF]': hoveredOption === i && selectedOption !== i,
           'bg-light-grey': hoveredOption !== i && selectedOption !== i,
-          'bg-purple': selectedOption === i
+          'bg-purple': selectedOption === i,
+          'bg-green': showFeedback && isCorrectOption(i),
+          'bg-red': showFeedback && selectedOption === i && !isCorrectOption(i)
         }"
         class="w-10 h-10 md:w-14 md:h-14 rounded-lg flex justify-center items-center"
       >
         <p
           [class.text-purple]="hoveredOption === i && selectedOption !== i"
           [class.text-pure-white]="selectedOption === i"
+          [class.text-pure-white]="showFeedback && isCorrectOption(i)"
+          [class.text-pure-white]="showFeedback && selectedOption === i && !isCorrectOption(i)"
           class="text-[18px] text-grey-navy font-normal"
         >
           {{ getOptionLabel(i) }}
@@ -49,52 +55,11 @@
           {{ option }}
         </p>
       </div>
-    </div>
-
-    <div *ngIf="showFeedback">
-      <div
-        *ngIf="isAnswerCorrect"
-        class="flex justify-between items-center bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS px-3 rounded-3xl border-green border-[3px]"
-      >
-        <div class="flex items-center gap-4">
-          <div
-            class="w-10 h-10 md:w-14 md:h-14 bg-green rounded-lg flex justify-center items-center"
-          >
-            <p class="text-[18px] text-pure-white font-normal">
-              {{ getOptionLabel(selectedOption!) }}
-            </p>
-          </div>
-          <div>
-            <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
-              {{ getCurrentQuestion()?.options?.[selectedOption!] ?? '' }}
-            </p>
-          </div>
-        </div>
-        <div>
-          <mat-icon svgIcon="icon-correct"></mat-icon>
-        </div>
+      <div *ngIf="showFeedback && isCorrectOption(i)">
+        <mat-icon svgIcon="icon-correct"></mat-icon>
       </div>
-      <div
-        *ngIf="!isAnswerCorrect"
-        class="flex justify-between items-center bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS px-3 rounded-3xl border-red border-[3px]"
-      >
-        <div class="flex items-center gap-4">
-          <div
-            class="w-10 h-10 md:w-14 md:h-14 bg-red rounded-lg flex justify-center items-center"
-          >
-            <p class="text-[18px] text-pure-white font-normal">
-              {{ getOptionLabel(selectedOption!) }}
-            </p>
-          </div>
-          <div>
-            <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
-              {{ getCurrentQuestion()?.options?.[selectedOption!] ?? '' }}
-            </p>
-          </div>
-        </div>
-        <div>
-          <mat-icon svgIcon="icon-incorrect"></mat-icon>
-        </div>
+      <div *ngIf="showFeedback && selectedOption === i && !isCorrectOption(i)">
+        <mat-icon svgIcon="icon-incorrect"></mat-icon>
       </div>
     </div>
   </div>

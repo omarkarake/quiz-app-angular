@@ -73,4 +73,9 @@ export class QuestionsComponent implements OnInit {
       // Handle end of quiz logic here
     }
   }
+
+  isCorrectOption(index: number): boolean {
+    const currentQuestion = this.getCurrentQuestion();
+    return currentQuestion ? currentQuestion.options[index] === currentQuestion.answer : false;
+  }
 }
