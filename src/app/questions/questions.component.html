@@ -1,28 +1,19 @@
 <div class="mt-[32px] lg:mt-[99px] lg:flex lg:justify-between">
   <div class="lg:w-[40%] flex flex-col gap-4">
     <div>
-      <p
-        class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish"
-      >
+      <p class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish">
         Question {{ currentQuestionIndex + 1 }} of
         {{ quiz?.questions?.length ?? 0 }}
       </p>
     </div>
     <div>
-      <p
-        class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white"
-      >
+      <p class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white">
         {{ getCurrentQuestion()?.question ?? "" }}
       </p>
     </div>
     <div class="w-full mt-6">
-      <div
-        class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full"
-      >
-        <div
-          [style.width.%]="rangeValue"
-          class="range-fill bg-purple rounded"
-        ></div>
+      <div class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full">
+        <div [style.width.%]="rangeValue" class="range-fill bg-purple rounded"></div>
       </div>
     </div>
   </div>
@@ -33,12 +24,11 @@
       (mouseout)="hoveredOption = null"
       class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl cursor-pointer"
       [ngClass]="{
+        'border-purple border-[3px]': selectedOption === i && !showFeedback && !isCorrectOption(i),
+        'border-green border-[3px]': showFeedback && isCorrectOption(i),
         'border-purple border-[3px]': selectedOption === i && !showFeedback,
-        'border-green': showFeedback && isCorrectOption(i),
-        'border-red':
-          showFeedback && selectedOption === i && !isCorrectOption(i),
-        'border-none':
-          selectedOption !== i && !(showFeedback && isCorrectOption(i))
+        'border-red border-[3px]': showFeedback && selectedOption === i && !isCorrectOption(i),
+        'border-none': selectedOption !== i && !(showFeedback && isCorrectOption(i))
       }"
       (click)="selectOption(i)"
     >
@@ -86,9 +76,7 @@
     </p>
   </div>
   <div
-    *ngIf="
-      showFeedback && currentQuestionIndex < (quiz?.questions?.length ?? 0) - 1
-    "
+    *ngIf="showFeedback && currentQuestionIndex < (quiz?.questions?.length ?? 0) - 1"
     class="min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
     (click)="nextQuestion()"
   >
