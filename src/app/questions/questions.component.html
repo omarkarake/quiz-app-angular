@@ -96,7 +96,7 @@
 
 <div class="mt-6 flex gap-4">
   <div
-    *ngIf="selectedOption !== null && !showFeedback"
+    *ngIf="!showFeedback"
     class="min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
     (click)="submitAnswer()"
   >
