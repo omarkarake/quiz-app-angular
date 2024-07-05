@@ -1,15 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+interface Question {
+  question: string;
+  options: string[];
+  answer: string;
+}
+
+interface Quiz {
+  title: string;
+  questions: Question[];
+}
 
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
-  styleUrl: './questions.component.css',
+  styleUrls: ['./questions.component.css'],
 })
-export class QuestionsComponent {
+export class QuestionsComponent implements OnInit {
+  @Input() quiz: Quiz | null = null;
+  currentQuestionIndex = 0;
   rangeValue: number = 30;
   isHovered: boolean = false;
 
+  ngOnInit() {
+    if (this.quiz && this.quiz.questions.length > 0) {
+      this.currentQuestionIndex = 0;
+    }
+  }
+
   updateRangeBar(): void {
     this.rangeValue = Math.min(Math.max(this.rangeValue, 0), 100); // Ensure value is within 0-100
+  }
+
+  getCurrentQuestion(): Question | null {
+    if (this.quiz && this.quiz.questions.length > 0) {
+      return this.quiz.questions[this.currentQuestionIndex];
+    }
+    return null;
   }
 }

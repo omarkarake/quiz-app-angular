@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { QuizService } from '../quiz.service';
 
 interface Question {
@@ -19,7 +19,7 @@ interface Quiz {
 })
 export class StarterComponent implements OnInit {
   quizzes: Quiz[] = [];
-  selectedQuiz: Quiz | null = null;
+  @Output() quizSelected = new EventEmitter<Quiz>();
 
   constructor(private quizService: QuizService) {}
 
@@ -30,7 +30,7 @@ export class StarterComponent implements OnInit {
   }
 
   onSelectQuiz(quiz: Quiz): void {
-    this.selectedQuiz = quiz;
+    this.quizSelected.emit(quiz);
   }
 
   getIconForQuiz(title: string): string {

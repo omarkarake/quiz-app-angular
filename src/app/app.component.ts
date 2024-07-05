@@ -1,4 +1,3 @@
-// src/app/app.component.ts
 import { Component, OnInit, HostListener } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -13,6 +12,8 @@ export class AppComponent implements OnInit {
   title = 'quiz-app';
   isDarkMode = false;
   screenSize: 'lg' | 'md' | 'sm' = 'sm'; // Initialize with a default value
+  quizSelected = false;
+  selectedQuiz: any;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -77,5 +78,10 @@ export class AppComponent implements OnInit {
     } else {
       this.screenSize = 'sm';
     }
+  }
+
+  onQuizSelected(quiz: any) {
+    this.quizSelected = true;
+    this.selectedQuiz = quiz;
   }
 }
