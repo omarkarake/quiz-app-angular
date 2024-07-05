@@ -1,18 +1,28 @@
 <div class="mt-[32px] lg:mt-[99px] lg:flex lg:justify-between">
   <div class="lg:w-[40%] flex flex-col gap-4">
     <div>
-      <p class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish">
-        Question {{ currentQuestionIndex + 1 }} of {{ quiz?.questions?.length }}
+      <p
+        class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish"
+      >
+        Question {{ currentQuestionIndex + 1 }} of
+        {{ quiz?.questions?.length ?? 0 }}
       </p>
     </div>
     <div>
-      <p class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white">
+      <p
+        class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white"
+      >
         {{ getCurrentQuestion()?.question }}
       </p>
     </div>
     <div class="w-full mt-6">
-      <div class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full">
-        <div [style.width.%]="rangeValue" class="range-fill bg-purple rounded"></div>
+      <div
+        class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full"
+      >
+        <div
+          [style.width.%]="rangeValue"
+          class="range-fill bg-purple rounded"
+        ></div>
       </div>
     </div>
   </div>
@@ -53,30 +63,37 @@
   </div>
 </div>
 
-<div class="mt-6 flex gap-4">
+<div class="w-[100%] lg:flex lg:justify-end mt-6 flex gap-4">
   <div
-    class="min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
-    (click)="submitAnswer()"
-  >
-    <p class="text-pure-white text-[18px] md:text-headingS font-medium">
-      Submit Answer
-    </p>
-  </div>
-  <div
-    class="min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
+    *ngIf="currentQuestionIndex < (quiz?.questions?.length ?? 0) - 1"
+    class="w-[100%] lg:w-[50%] min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
     (click)="nextQuestion()"
   >
     <p class="text-pure-white text-[18px] md:text-headingS font-medium">
       Next Question
     </p>
   </div>
+  <div
+    *ngIf="currentQuestionIndex === (quiz?.questions?.length ?? 0) - 1"
+    class="w-[100%] lg:w-[50%] min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer"
+    (click)="submitAnswer()"
+  >
+    <p class="text-pure-white text-[18px] md:text-headingS font-medium">
+      Submit Answer
+    </p>
+  </div>
 </div>
 
-<div *ngIf="showError" class="flex justify-center items-center gap-2 mt-3 md:mt-[34px]">
-  <div class="flex justify-center items-center">
-    <mat-icon svgIcon="icon-incorrect"></mat-icon>
+<div class="w-[100%] lg:flex lg:justify-end">
+  <div
+    *ngIf="showError"
+    class="w-[100%] lg:w-[50%] flex justify-center items-center gap-2 mt-3 md:mt-[34px]"
+  >
+    <div class="flex justify-center items-center">
+      <mat-icon svgIcon="icon-incorrect"></mat-icon>
+    </div>
+    <p class="text-[18px] text-red md:text-bodyM pt-1 md:pt-[2px]">
+      Please select an answer
+    </p>
   </div>
-  <p class="text-[18px] text-red md:text-bodyM pt-1 md:pt-[2px]">
-    Please select an answer
-  </p>
 </div>

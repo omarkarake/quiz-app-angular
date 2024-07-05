@@ -26,7 +26,7 @@ export class QuestionsComponent implements OnInit {
   showError: boolean = false;
 
   ngOnInit() {
-    if (this.quiz && this.quiz.questions.length > 0) {
+    if (this.quiz?.questions?.length) {
       this.currentQuestionIndex = 0;
     }
   }
@@ -36,10 +36,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   getCurrentQuestion(): Question | null {
-    if (this.quiz && this.quiz.questions.length > 0) {
-      return this.quiz.questions[this.currentQuestionIndex];
-    }
-    return null;
+    return this.quiz?.questions?.[this.currentQuestionIndex] ?? null;
   }
 
   getOptionLabel(index: number): string {
@@ -56,7 +53,7 @@ export class QuestionsComponent implements OnInit {
       this.showError = true;
     } else {
       // Handle answer submission logic here, e.g., check if the answer is correct
-      if (this.currentQuestionIndex < this.quiz!.questions.length - 1) {
+      if (this.currentQuestionIndex < (this.quiz?.questions.length ?? 0) - 1) {
         this.nextQuestion();
       } else {
         console.log('End of quiz, handle final submission');
