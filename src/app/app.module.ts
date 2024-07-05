@@ -16,6 +16,7 @@ import { StarterComponent } from './starter/starter.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { ButtonComponent } from './button/button.component';
 import { ScoreComponent } from './score/score.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ScoreComponent } from './score/score.component';
     QuestionsComponent,
     ButtonComponent,
     ScoreComponent,
+    QuizComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,63 +22,30 @@
   </div>
   <div class="lg:w-[50%] flex flex-col gap-6 mt-16 lg:mt-0">
     <div
+      *ngFor="let quiz of quizzes"
+      (click)="onSelectQuiz(quiz)"
       class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md cursor-pointer"
     >
       <div
         class="w-10 h-10 md:w-14 md:h-14 bg-[#FFF1E9] rounded-lg flex justify-center items-center"
       >
-        <mat-icon svgIcon="icon-html"></mat-icon>
+        <mat-icon [svgIcon]="quiz.icon"></mat-icon>
       </div>
       <div>
         <p class="font-medium text-[18px] text-grey-navy dark:text-pure-white">
-          HTML
+          {{ quiz.title }}
         </p>
       </div>
     </div>
+  </div>
+</div>
 
-    <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md cursor-pointer"
-    >
-      <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-[#E0FDEF] rounded-lg flex justify-center items-center"
-      >
-        <mat-icon svgIcon="icon-css"></mat-icon>
-      </div>
-      <div>
-        <p class="font-medium text-[18px] text-grey-navy dark:text-pure-white">
-          CSS
-        </p>
-      </div>
-    </div>
-
-    <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md cursor-pointer"
-    >
-      <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-[#EBF0FF] rounded-lg flex justify-center items-center"
-      >
-        <mat-icon svgIcon="icon-html"></mat-icon>
-      </div>
-      <div>
-        <p class="font-medium text-[18px] text-grey-navy dark:text-pure-white">
-          Javascript
-        </p>
-      </div>
-    </div>
-
-    <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md cursor-pointer"
-    >
-      <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-[#F6E7FF] rounded-lg flex justify-center items-center"
-      >
-        <mat-icon svgIcon="icon-accessibility"></mat-icon>
-      </div>
-      <div>
-        <p class="font-medium text-[18px] text-grey-navy dark:text-pure-white">
-          Accessibility
-        </p>
-      </div>
-    </div>
+<div *ngIf="selectedQuiz" class="quiz-details mt-8">
+  <h2>{{ selectedQuiz.title }} Quiz</h2>
+  <div *ngFor="let question of selectedQuiz.questions">
+    <p>{{ question.question }}</p>
+    <ul>
+      <li *ngFor="let option of question.options">{{ option }}</li>
+    </ul>
   </div>
 </div>

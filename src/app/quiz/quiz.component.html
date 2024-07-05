@@ -1,0 +1,10 @@
+<div *ngIf="quiz">
+    <h2>{{ quiz.title }} Quiz</h2>
+    <div *ngFor="let question of quiz.questions">
+      <p>{{ question.question }}</p>
+      <ul>
+        <li *ngFor="let option of question.options">{{ option }}</li>
+      </ul>
+    </div>
+  </div>
+  
