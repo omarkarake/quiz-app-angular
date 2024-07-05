@@ -9,7 +9,6 @@ interface Question {
 
 interface Quiz {
   title: string;
-  icon: string;
   questions: Question[];
 }
 
@@ -32,5 +31,20 @@ export class StarterComponent implements OnInit {
 
   onSelectQuiz(quiz: Quiz): void {
     this.selectedQuiz = quiz;
+  }
+
+  getIconForQuiz(title: string): string {
+    switch (title) {
+      case 'JavaScript':
+        return 'icon-js';
+      case 'HTML':
+        return 'icon-html';
+      case 'CSS':
+        return 'icon-css';
+      case 'Accessibility':
+        return 'icon-accessibility';
+      default:
+        return 'icon-default';
+    }
   }
 }
