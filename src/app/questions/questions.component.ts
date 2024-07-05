@@ -21,6 +21,8 @@ export class QuestionsComponent implements OnInit {
   currentQuestionIndex = 0;
   rangeValue: number = 30;
   isHovered: boolean = false;
+  hoveredOption: number | null = null;
+  selectedOption: number | null = null;
 
   ngOnInit() {
     if (this.quiz && this.quiz.questions.length > 0) {
@@ -37,5 +39,13 @@ export class QuestionsComponent implements OnInit {
       return this.quiz.questions[this.currentQuestionIndex];
     }
     return null;
+  }
+
+  getOptionLabel(index: number): string {
+    return String.fromCharCode(65 + index); // Convert index to A, B, C, etc.
+  }
+
+  selectOption(index: number): void {
+    this.selectedOption = index;
   }
 }

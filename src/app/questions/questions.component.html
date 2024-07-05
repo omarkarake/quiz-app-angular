@@ -1,147 +1,53 @@
 <div class="mt-[32px] lg:mt-[99px] lg:flex lg:justify-between">
   <div class="lg:w-[40%] flex flex-col gap-4">
     <div>
-      <p
-        class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish"
-      >
-        Question 6 of 10
+      <p class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish">
+        Question {{ currentQuestionIndex + 1 }} of {{ quiz?.questions?.length }}
       </p>
     </div>
     <div>
-      <p
-        class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white"
-      >
-        Which of these color contrast ratios defines the minimum WCAG 2.1 Level
-        AA requirement for normal text?
+      <p class="text-[20px] mt-3 md:text-headingM font-medium text-dark-navy dark:text-pure-white">
+        {{ getCurrentQuestion()?.question }}
       </p>
     </div>
     <div class="w-full mt-6">
-      <!-- <div class="mb-4">
-          <label for="rangeInput" class="block text-sm font-medium text-gray-700">Enter Range Value (0-100):</label>
-          <input
-            type="number"
-            id="rangeInput"
-            min="0"
-            max="100"
-            [(ngModel)]="rangeValue"
-            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            (input)="updateRangeBar()"
-          />
-        </div> -->
-      <div
-        class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full"
-      >
-        <div
-          [style.width.%]="rangeValue"
-          class="range-fill bg-purple rounded"
-        ></div>
+      <div class="relative w-full h-4 range-bar bg-pure-white dark:bg-navy rounded-full">
+        <div [style.width.%]="rangeValue" class="range-fill bg-purple rounded"></div>
       </div>
     </div>
   </div>
   <div class="lg:w-[50%] flex flex-col gap-6 mt-16 lg:mt-0">
-    <!-- Selection hover effect on question -->
     <div
+      *ngFor="let option of getCurrentQuestion()?.options; let i = index"
+      (mouseover)="hoveredOption = i"
+      (mouseout)="hoveredOption = null"
       class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl cursor-pointer"
-      (mouseover)="isHovered = true"
-      (mouseout)="isHovered = false"
+      [ngClass]="{
+        'border-purple border-[3px]': selectedOption === i,
+        'border-none': selectedOption !== i
+      }"
+      (click)="selectOption(i)"
     >
       <div
-        [ngClass]="{ 'bg-[#F6E7FF]': isHovered, 'bg-light-grey': !isHovered }"
+        [ngClass]="{
+          'bg-[#F6E7FF]': hoveredOption === i && selectedOption !== i,
+          'bg-light-grey': hoveredOption !== i && selectedOption !== i,
+          'bg-purple': selectedOption === i
+        }"
         class="w-10 h-10 md:w-14 md:h-14 rounded-lg flex justify-center items-center"
       >
         <p
-          [class.text-purple]="isHovered"
+          [class.text-purple]="hoveredOption === i && selectedOption !== i"
+          [class.text-pure-white]="selectedOption === i"
           class="text-[18px] text-grey-navy font-normal"
         >
-          A
+          {{ getOptionLabel(i) }}
         </p>
       </div>
       <div>
         <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
-          4.5 : 1
+          {{ option }}
         </p>
-      </div>
-    </div>
-
-    <!-- Selection active question -->
-    <div
-      class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl border-purple border-[3px]"
-    >
-      <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-purple rounded-lg flex justify-center items-center"
-      >
-        <p class="text-[18px] text-pure-white font-normal">B</p>
-      </div>
-      <div>
-        <p class="font-medium text-[18px] text-dark-navy dark:text-pure-white">
-          3 : 1
-        </p>
-      </div>
-    </div>
-    <!-- Correct answer -->
-    <div
-      class="flex justify-between items-center bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS px-3 rounded-3xl"
-    >
-      <div class="flex items-center gap-4">
-        <div
-          class="w-10 h-10 md:w-14 md:h-14 bg-light-grey rounded-lg flex justify-center items-center"
-        >
-          <p class="text-[18px] text-grey-navy font-normal">C</p>
-        </div>
-        <div>
-          <p
-            class="font-medium text-[18px] text-dark-navy dark:text-pure-white"
-          >
-            2.5 : 1
-          </p>
-        </div>
-      </div>
-      <div>
-        <mat-icon svgIcon="icon-correct"></mat-icon>
-      </div>
-    </div>
-    <!-- Picked correctly -->
-    <div
-      class="flex justify-between items-center bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS px-3 rounded-3xl border-green border-[3px]"
-    >
-      <div class="flex items-center gap-4">
-        <div
-          class="w-10 h-10 md:w-14 md:h-14 bg-green rounded-lg flex justify-center items-center"
-        >
-          <p class="text-[18px] text-pure-white font-normal">C</p>
-        </div>
-        <div>
-          <p
-            class="font-medium text-[18px] text-dark-navy dark:text-pure-white"
-          >
-            2.5 : 1
-          </p>
-        </div>
-      </div>
-      <div>
-        <mat-icon svgIcon="icon-correct"></mat-icon>
-      </div>
-    </div>
-    <!-- Picked incorrectly -->
-    <div
-      class="flex justify-between items-center bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS px-3 rounded-3xl border-red border-[3px]"
-    >
-      <div class="flex items-center gap-4">
-        <div
-          class="w-10 h-10 md:w-14 md:h-14 bg-red rounded-lg flex justify-center items-center"
-        >
-          <p class="text-[18px] text-pure-white font-normal">C</p>
-        </div>
-        <div>
-          <p
-            class="font-medium text-[18px] text-dark-navy dark:text-pure-white"
-          >
-            2.5 : 1
-          </p>
-        </div>
-      </div>
-      <div>
-        <mat-icon svgIcon="icon-incorrect"></mat-icon>
       </div>
     </div>
   </div>
