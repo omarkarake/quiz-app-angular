@@ -50,6 +50,8 @@
             hoveredOption !== i && selectedOption !== i && !showFeedback,
           'bg-purple': selectedOption === i && !showFeedback,
           'bg-green': showFeedback && isCorrectOption(i),
+          'bg-light-grey':
+            showFeedback && selectedOption !== i && !isCorrectOption(i),
           'bg-red': showFeedback && selectedOption === i && !isCorrectOption(i)
         }"
         class="w-10 h-10 md:w-14 md:h-14 rounded-lg flex justify-center items-center"
