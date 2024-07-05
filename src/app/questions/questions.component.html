@@ -119,12 +119,14 @@
 
 <div
   *ngIf="showError"
-  class="flex justify-center items-center gap-2 mt-3 md:mt-[34px]"
+  class="w-[100%] flex justify-center lg:justify-end items-center gap-2 mt-3 lg:mt-2 md:mt-[34px]"
 >
-  <div class="flex justify-center items-center">
-    <mat-icon svgIcon="icon-incorrect"></mat-icon>
+  <div class="flex justify-center items-center lg:w-[50%]">
+    <div class="flex justify-center items-center">
+      <mat-icon svgIcon="icon-incorrect"></mat-icon>
+    </div>
+    <p class="text-[18px] text-red md:text-bodyM pt-1 md:pt-[2px]">
+      Please select an answer
+    </p>
   </div>
-  <p class="text-[18px] text-red md:text-bodyM pt-1 md:pt-[2px]">
-    Please select an answer
-  </p>
 </div>
