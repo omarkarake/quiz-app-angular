@@ -33,7 +33,7 @@
       (mouseout)="hoveredOption = null"
       class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-3xl cursor-pointer"
       [ngClass]="{
-        'border-purple border-[3px]': selectedOption === i,
+        'border-purple border-[3px]': selectedOption === i && !showFeedback,
         'border-green': showFeedback && isCorrectOption(i),
         'border-red':
           showFeedback && selectedOption === i && !isCorrectOption(i),
@@ -44,21 +44,17 @@
     >
       <div
         [ngClass]="{
-          'bg-[#F6E7FF]': hoveredOption === i && selectedOption !== i,
-          'bg-light-grey': hoveredOption !== i && selectedOption !== i,
-          'bg-purple': selectedOption === i,
+          'bg-[#F6E7FF]': hoveredOption === i && selectedOption !== i && !showFeedback,
+          'bg-light-grey': hoveredOption !== i && selectedOption !== i && !showFeedback,
+          'bg-purple': selectedOption === i && !showFeedback,
           'bg-green': showFeedback && isCorrectOption(i),
           'bg-red': showFeedback && selectedOption === i && !isCorrectOption(i)
         }"
         class="w-10 h-10 md:w-14 md:h-14 rounded-lg flex justify-center items-center"
       >
         <p
-          [class.text-purple]="hoveredOption === i && selectedOption !== i"
-          [class.text-pure-white]="selectedOption === i"
-          [class.text-pure-white]="showFeedback && isCorrectOption(i)"
-          [class.text-pure-white]="
-            showFeedback && selectedOption === i && !isCorrectOption(i)
-          "
+          [class.text-purple]="hoveredOption === i && selectedOption !== i && !showFeedback"
+          [class.text-pure-white]="selectedOption === i || (showFeedback && (isCorrectOption(i) || selectedOption === i && !isCorrectOption(i)))"
           class="text-[18px] text-grey-navy font-normal"
         >
           {{ getOptionLabel(i) }}

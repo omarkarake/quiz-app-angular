@@ -20,7 +20,6 @@ export class QuestionsComponent implements OnInit {
   @Input() quiz: Quiz | null = null;
   currentQuestionIndex = 0;
   rangeValue: number = 30;
-  isHovered: boolean = false;
   hoveredOption: number | null = null;
   selectedOption: number | null = null;
   showError: boolean = false;
@@ -46,8 +45,10 @@ export class QuestionsComponent implements OnInit {
   }
 
   selectOption(index: number): void {
-    this.selectedOption = index;
-    this.showError = false; // Hide error when an option is selected
+    if (!this.showFeedback) {
+      this.selectedOption = index;
+      this.showError = false; // Hide error when an option is selected
+    }
   }
 
   submitAnswer(): void {
