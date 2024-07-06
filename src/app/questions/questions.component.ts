@@ -66,14 +66,6 @@ export class QuestionsComponent implements OnInit {
         if (this.isAnswerCorrect) {
           this.score++;
         }
-        // Handle the last question scenario
-        if (
-          this.currentQuestionIndex ===
-          (this.quiz?.questions?.length ?? 0) - 1
-        ) {
-          // Last question, submit quiz
-          this.quizCompleted.emit(this.score);
-        }
       }
     }
   }
@@ -84,6 +76,9 @@ export class QuestionsComponent implements OnInit {
       this.selectedOption = null;
       this.showError = false;
       this.showFeedback = false;
+    } else {
+      // Last question, submit quiz
+      this.quizCompleted.emit(this.score);
     }
   }
 
