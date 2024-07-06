@@ -31,6 +31,7 @@ export class QuestionsComponent implements OnInit {
     if (this.quiz?.questions?.length) {
       this.currentQuestionIndex = 0;
     }
+    console.log('Quiz initialized:', this.quiz);
   }
 
   get rangeValue(): number {
@@ -50,12 +51,14 @@ export class QuestionsComponent implements OnInit {
     if (!this.showFeedback) {
       this.selectedOption = index;
       this.showError = false; // Hide error when an option is selected
+      console.log('Option selected:', index);
     }
   }
 
   submitAnswer(): void {
     if (this.selectedOption === null) {
       this.showError = true;
+      console.log('No option selected, showing error');
     } else {
       const currentQuestion = this.getCurrentQuestion();
       if (currentQuestion) {
@@ -66,6 +69,13 @@ export class QuestionsComponent implements OnInit {
         if (this.isAnswerCorrect) {
           this.score++;
         }
+        console.log('Answer submitted:', {
+          selectedOption: this.selectedOption,
+          isAnswerCorrect: this.isAnswerCorrect,
+          currentScore: this.score,
+        });
+        // Log the current score
+        console.log('Current Score:', this.score);
       }
     }
   }
@@ -76,8 +86,10 @@ export class QuestionsComponent implements OnInit {
       this.selectedOption = null;
       this.showError = false;
       this.showFeedback = false;
+      console.log('Moving to next question:', this.currentQuestionIndex);
     } else {
       // Last question, submit quiz
+      console.log('Quiz completed with score:', this.score);
       this.quizCompleted.emit(this.score);
     }
   }
