@@ -94,10 +94,7 @@ export class AppComponent implements OnInit {
   onQuizSelected(quiz: any) {
     this.quizSelected = true;
     this.selectedQuiz = quiz;
-    console.log('the selected quiz is: ', this.selectedQuiz);
-
     this.totalQuestions = quiz.questions.length;
-    // Example of setting selected icon and subject
     this.selectedIcon = this.extractIconName(this.selectedQuiz.icon);
     this.selectedSubject = this.selectedQuiz.title;
   }
