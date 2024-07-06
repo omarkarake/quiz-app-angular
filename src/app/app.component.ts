@@ -84,13 +84,22 @@ export class AppComponent implements OnInit {
     }
   }
 
+  extractIconName(iconPath: string): string {
+    const parts = iconPath.split('/');
+    const iconFileName = parts[parts.length - 1];
+    const iconName = iconFileName.split('.')[0]; // Remove the file extension
+    return iconName;
+  }
+
   onQuizSelected(quiz: any) {
     this.quizSelected = true;
     this.selectedQuiz = quiz;
+    console.log('the selected quiz is: ', this.selectedQuiz);
+
     this.totalQuestions = quiz.questions.length;
     // Example of setting selected icon and subject
-    this.selectedIcon = 'icon-accessibility'; // Update this as needed
-    this.selectedSubject = 'Accessibility'; // Update this as needed
+    this.selectedIcon = this.extractIconName(this.selectedQuiz.icon);
+    this.selectedSubject = this.selectedQuiz.title;
   }
 
   onQuizCompleted(score: number) {
