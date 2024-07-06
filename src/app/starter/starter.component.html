@@ -1,33 +1,28 @@
 <div class="mt-[32px] lg:mt-[99px] lg:flex lg:justify-between">
   <div class="flex flex-col gap-4">
     <div>
-      <p
-        class="text-[40px] md:text-headingL font-light text-dark-navy dark:text-pure-white"
-      >
+      <p class="text-[40px] md:text-headingL font-light text-dark-navy dark:text-pure-white">
         Welcome to the
       </p>
-      <p
-        class="text-[40px] font-medium md:text-headingL text-dark-navy lg:font-bold dark:text-pure-white"
-      >
+      <p class="text-[40px] font-medium md:text-headingL text-dark-navy lg:font-bold dark:text-pure-white">
         Frontend Quiz!
       </p>
     </div>
     <div>
-      <p
-        class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish"
-      >
+      <p class="text-[14px] italic md:text-bodyS text-grey-navy dark:text-light-blueish">
         Pick a subject to get started.
       </p>
     </div>
   </div>
   <div class="lg:w-[50%] flex flex-col gap-6 mt-16 lg:mt-0">
     <div
-      *ngFor="let quiz of quizzes"
+      *ngFor="let quiz of quizzes; let i = index"
       (click)="onSelectQuiz(quiz)"
       class="flex items-center gap-4 bg-pure-white dark:bg-navy h-16 md:h-20 md:text-headingS pl-3 rounded-md cursor-pointer"
     >
       <div
-        class="w-10 h-10 md:w-14 md:h-14 bg-[#FFF1E9] rounded-lg flex justify-center items-center"
+        [ngStyle]="{ 'background-color': getBackgroundColor(i) }"
+        class="w-10 h-10 md:w-14 md:h-14 rounded-lg flex justify-center items-center"
       >
         <mat-icon [svgIcon]="getIconForQuiz(quiz.title)"></mat-icon>
       </div>

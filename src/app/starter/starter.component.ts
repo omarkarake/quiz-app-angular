@@ -18,6 +18,13 @@ interface Quiz {
   styleUrls: ['./starter.component.css'],
 })
 export class StarterComponent implements OnInit {
+  colors: string[] = ['#FFF1E9', '#E0FDEF', '#EBF0FF', '#F6E7FF'];
+
+getBackgroundColor(index: number): string {
+  return this.colors[index % this.colors.length];
+}
+
+
   quizzes: Quiz[] = [];
   @Output() quizSelected = new EventEmitter<Quiz>();
 
