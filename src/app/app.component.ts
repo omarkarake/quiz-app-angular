@@ -13,7 +13,10 @@ export class AppComponent implements OnInit {
   isDarkMode = false;
   screenSize: 'lg' | 'md' | 'sm' = 'sm'; // Initialize with a default value
   quizSelected = false;
+  quizCompleted = false;
   selectedQuiz: any;
+  score = 0;
+  totalQuestions = 0;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -83,5 +86,11 @@ export class AppComponent implements OnInit {
   onQuizSelected(quiz: any) {
     this.quizSelected = true;
     this.selectedQuiz = quiz;
+    this.totalQuestions = quiz.questions.length;
+  }
+
+  onQuizCompleted(score: number) {
+    this.quizCompleted = true;
+    this.score = score;
   }
 }

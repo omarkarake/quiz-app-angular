@@ -13,11 +13,19 @@
     class="px-6 md:px-[64px] lg:px-[140px]"
   >
     <app-header></app-header>
-    <ng-container *ngIf="!quizSelected; else questionsTemplate">
+    <div *ngIf="!quizSelected">
       <app-starter (quizSelected)="onQuizSelected($event)"></app-starter>
-    </ng-container>
-    <ng-template #questionsTemplate>
-      <app-questions [quiz]="selectedQuiz"></app-questions>
-    </ng-template>
+    </div>
+
+    <div *ngIf="quizSelected && !quizCompleted">
+      <app-questions
+        [quiz]="selectedQuiz"
+        (quizCompleted)="onQuizCompleted($event)"
+      ></app-questions>
+    </div>
+
+    <div *ngIf="quizCompleted">
+      <app-score [score]="score" [totalQuestions]="totalQuestions"></app-score>
+    </div>
   </div>
 </div>

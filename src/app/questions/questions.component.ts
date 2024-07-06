@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 interface Question {
   question: string;
@@ -18,12 +18,14 @@ interface Quiz {
 })
 export class QuestionsComponent implements OnInit {
   @Input() quiz: Quiz | null = null;
+  @Output() quizCompleted = new EventEmitter<number>();
   currentQuestionIndex = 0;
   hoveredOption: number | null = null;
   selectedOption: number | null = null;
   showError: boolean = false;
   showFeedback: boolean = false;
   isAnswerCorrect: boolean = false;
+  score = 0;
 
   ngOnInit() {
     if (this.quiz?.questions?.length) {
@@ -33,7 +35,7 @@ export class QuestionsComponent implements OnInit {
 
   get rangeValue(): number {
     const totalQuestions = this.quiz?.questions?.length ?? 1;
-    return ((this.currentQuestionIndex / totalQuestions) * 100) + 10;
+    return (this.currentQuestionIndex / totalQuestions) * 100 + 10;
   }
 
   getCurrentQuestion(): Question | null {
@@ -61,6 +63,17 @@ export class QuestionsComponent implements OnInit {
           currentQuestion.options[this.selectedOption] ===
           currentQuestion.answer;
         this.showFeedback = true;
+        if (this.isAnswerCorrect) {
+          this.score++;
+        }
+        // Handle the last question scenario
+        if (
+          this.currentQuestionIndex ===
+          (this.quiz?.questions?.length ?? 0) - 1
+        ) {
+          // Last question, submit quiz
+          this.quizCompleted.emit(this.score);
+        }
       }
     }
   }
@@ -71,9 +84,6 @@ export class QuestionsComponent implements OnInit {
       this.selectedOption = null;
       this.showError = false;
       this.showFeedback = false;
-    } else {
-      console.log('End of quiz, handle final submission');
-      // Handle end of quiz logic here
     }
   }
 
