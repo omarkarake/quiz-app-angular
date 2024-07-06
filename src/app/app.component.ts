@@ -93,4 +93,11 @@ export class AppComponent implements OnInit {
     this.quizCompleted = true;
     this.score = score;
   }
+  resetQuiz() {
+    this.quizSelected = false;
+    this.quizCompleted = false;
+    this.selectedQuiz = null;
+    this.score = 0;
+    this.totalQuestions = 0;
+  }
 }

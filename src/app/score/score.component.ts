@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-score',
@@ -8,4 +8,9 @@ import { Component, Input } from '@angular/core';
 export class ScoreComponent {
   @Input() score: number = 0;
   @Input() totalQuestions: number = 0;
+  @Output() playAgain = new EventEmitter<void>();
+
+  onPlayAgain() {
+    this.playAgain.emit();
+  }
 }

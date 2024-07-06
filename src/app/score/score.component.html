@@ -18,9 +18,7 @@
       <div
         class="flex justify-center items-center gap-4 dark:bg-navy h-16 md:h-20 md:text-headingS rounded-md"
       >
-        <div
-          class="w-10 h-10 md:w-14 md:h-14 bg-[#F6E7FF] rounded-lg flex justify-center items-center"
-        >
+        <div class="w-10 h-10 md:w-14 md:h-14 bg-[#F6E7FF] rounded-lg flex justify-center items-center">
           <mat-icon svgIcon="icon-accessibility"></mat-icon>
         </div>
         <div>
@@ -33,15 +31,14 @@
         <p class="text-dark-navy font-medium text-[88px] h-auto md:text-display dark:text-pure-white">
           {{ score }}
         </p>
-        <p
-          class="text-grey-navy text-[18px] md:text-bodyM dark:text-light-blueish"
-        >
+        <p class="text-grey-navy text-[18px] md:text-bodyM dark:text-light-blueish">
           out of {{ totalQuestions }}
         </p>
       </div>
     </div>
     <div
       class="min-h-14 md:min-h-[92px] bg-purple hover:opacity-50 rounded-xl flex justify-center items-center cursor-pointer mt-3"
+      (click)="onPlayAgain()"
     >
       <p class="text-pure-white text-[18px] md:text-headingS font-medium">
         Play Again

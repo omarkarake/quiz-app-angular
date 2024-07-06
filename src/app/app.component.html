@@ -21,11 +21,12 @@
       <app-questions
         [quiz]="selectedQuiz"
         (quizCompleted)="onQuizCompleted($event)"
+        (playAgain)="resetQuiz()"
       ></app-questions>
     </div>
 
     <div *ngIf="quizCompleted">
-      <app-score [score]="score" [totalQuestions]="totalQuestions"></app-score>
+      <app-score [score]="score" [totalQuestions]="totalQuestions" (playAgain)="resetQuiz()"></app-score>
     </div>
   </div>
 </div>
