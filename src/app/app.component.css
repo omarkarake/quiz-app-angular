@@ -1,24 +1,31 @@
 .image-bg-light-desktop {
   background: url("../assets/images/pattern-background-desktop-light.svg");
   background-repeat: no-repeat;
+  min-height: 100vh;
+  max-height: 960px;
 }
 .image-bg-dark-desktop {
   background: url("../assets/images/pattern-background-desktop-dark.svg");
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 .image-bg-light-tablet {
   background: url("../assets/images/pattern-background-tablet-light.svg");
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 .image-bg-dark-tablet {
   background: url("../assets/images/pattern-background-tablet-dark.svg");
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 .image-bg-light-mobile {
   background: url("../assets/images/pattern-background-mobile-light.svg");
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 .image-bg-dark-mobile {
   background: url("../assets/images/pattern-background-mobile-dark.svg");
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
