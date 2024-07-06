@@ -1,27 +1,60 @@
-# QuizApp
+## Frontend Quiz Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+Welcome to the Frontend Quiz Application! This is a web application built with Angular that allows users to take quizzes on various frontend development topics.
 
-## Development server
+## Live Demo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Check out the live version of the project here: [Frontend Quiz Application](https://quiz-app-angularmasterclass.netlify.app/)
 
-## Code scaffolding
+## Table of Contents
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- User-friendly interface with responsive design
+- Dynamic quiz generation based on selected topics
+- Dark mode and light mode support
+- Score tracking and feedback on quiz completion
+- Responsive design for all screen sizes
+- User can select a quiz topic to start
+- Displays score upon quiz completion
 
-## Running unit tests
+## Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To run this project locally, follow these steps:
 
-## Running end-to-end tests
+1. Clone the repository:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   git clone https://github.com/omarkarake/quiz-app-angular.git
+   ```
 
-## Further help
+2. Navigate to the project directory:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   ```bash
+   cd frontend-quiz-app
+   ```
+
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   ng serve
+   ```
+
+   The application will be available at `http://localhost:4200`.
+
+## Usage
+
+1. Open the application in your web browser.
+2. Select a quiz topic to get started.
+3. Answer the quiz questions and submit your answers.
+4. View your score and feedback on quiz completion.
