@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   quizSelected = false;
   quizCompleted = false;
   selectedQuiz: any;
+  selectedIcon: string | null = null;
+  selectedSubject: string | null = null;
   score = 0;
   totalQuestions = 0;
 
@@ -57,7 +59,6 @@ export class AppComponent implements OnInit {
     // Subscribe to dark mode changes
     this.darkModeService.darkMode$.subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
-      // You can apply dark mode changes to the app here if needed
     });
 
     // Determine initial screen size
@@ -87,16 +88,22 @@ export class AppComponent implements OnInit {
     this.quizSelected = true;
     this.selectedQuiz = quiz;
     this.totalQuestions = quiz.questions.length;
+    // Example of setting selected icon and subject
+    this.selectedIcon = 'icon-accessibility'; // Update this as needed
+    this.selectedSubject = 'Accessibility'; // Update this as needed
   }
 
   onQuizCompleted(score: number) {
     this.quizCompleted = true;
     this.score = score;
   }
+
   resetQuiz() {
     this.quizSelected = false;
     this.quizCompleted = false;
     this.selectedQuiz = null;
+    this.selectedIcon = null;
+    this.selectedSubject = null;
     this.score = 0;
     this.totalQuestions = 0;
   }

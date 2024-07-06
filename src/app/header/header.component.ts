@@ -1,5 +1,4 @@
-// src/app/header/header.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DarkModeService } from '../dark-mode.service';
 
 @Component({
@@ -8,6 +7,8 @@ import { DarkModeService } from '../dark-mode.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  @Input() icon: string | null = null;
+  @Input() subject: string | null = null;
   isDarkMode = false;
 
   constructor(private darkModeService: DarkModeService) {}

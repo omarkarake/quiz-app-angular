@@ -1,15 +1,15 @@
 <div class="flex justify-between items-center pt-[26px] md:pt-[40px]">
-  <div class="flex items-center gap-4 lg:gap-6">
+  <div *ngIf="subject && icon" class="flex items-center gap-4 lg:gap-6">
     <div
       class="w-14 h-14 bg-[#F6E7FF] rounded-lg flex justify-center items-center"
     >
-      <mat-icon svgIcon="icon-accessibility"></mat-icon>
+      <mat-icon [svgIcon]="icon"></mat-icon>
     </div>
     <div>
       <p
         class="text-[18px] md:text-headingS text-dark-navy dark:text-pure-white"
       >
-        Accessibility
+        {{ subject }}
       </p>
     </div>
   </div>
