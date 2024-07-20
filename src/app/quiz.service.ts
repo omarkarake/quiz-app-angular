@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-interface Question {
+export interface Question {
   question: string;
   options: string[];
   answer: string;
 }
 
-interface Quiz {
+export interface Quiz {
   title: string;
   icon: string;
   questions: Question[];
 }
 
-interface QuizData {
+export interface QuizData {
   quizzes: Quiz[];
 }
 
@@ -22,7 +22,7 @@ interface QuizData {
   providedIn: 'root',
 })
 export class QuizService {
-  private dataUrl = '../assets/data.json';
+  dataUrl = '../assets/data.json';
 
   constructor(private http: HttpClient) {}
 
