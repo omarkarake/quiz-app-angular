@@ -52,4 +52,22 @@ describe('AppComponent', () => {
     expect(component.isDarkMode).toBe(true);
     expect(updateScreenSizeSpy).toHaveBeenCalled();
   });
+
+  it('should call onResize and update screen size', () => {
+    const updateScreenSizeSpy = jest.spyOn(component, 'updateScreenSize');
+    
+    // Mock the window.innerWidth
+    Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 800 });
+    
+    // Trigger the resize event
+    window.dispatchEvent(new Event('resize'));
+    
+    expect(updateScreenSizeSpy).toHaveBeenCalled();
+    
+    // Check if screenSize is updated correctly
+    expect(component.screenSize).toBe('md');
+    
+    // Clean up the spy
+    updateScreenSizeSpy.mockRestore();
+  });
 });
