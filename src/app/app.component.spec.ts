@@ -70,4 +70,21 @@ describe('AppComponent', () => {
     // Clean up the spy
     updateScreenSizeSpy.mockRestore();
   });
+  it('should update screen size to "sm" when window width is less than 768', () => {
+    const updateScreenSizeSpy = jest.spyOn(component, 'updateScreenSize');
+    
+    // Mock the window.innerWidth
+    Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 600 });
+    
+    // Trigger the resize event
+    window.dispatchEvent(new Event('resize'));
+    
+    expect(updateScreenSizeSpy).toHaveBeenCalled();
+    
+    // Check if screenSize is updated correctly
+    expect(component.screenSize).toBe('sm');
+    
+    // Clean up the spy
+    updateScreenSizeSpy.mockRestore();
+  });
 });
