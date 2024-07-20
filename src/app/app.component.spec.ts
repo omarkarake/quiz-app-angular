@@ -87,4 +87,28 @@ describe('AppComponent', () => {
     // Clean up the spy
     updateScreenSizeSpy.mockRestore();
   });
+
+  it('should extract icon name correctly from a given path', () => {
+    const iconPath = 'assets/images/icon-accessibility.svg';
+    const expectedIconName = 'icon-accessibility';
+
+    const result = component.extractIconName(iconPath);
+    expect(result).toBe(expectedIconName);
+  });
+
+  it('should handle paths with multiple slashes correctly', () => {
+    const iconPath = 'some/path/to/icon-correct.svg';
+    const expectedIconName = 'icon-correct';
+
+    const result = component.extractIconName(iconPath);
+    expect(result).toBe(expectedIconName);
+  });
+
+  it('should handle paths with no slashes correctly', () => {
+    const iconPath = 'icon-error.svg';
+    const expectedIconName = 'icon-error';
+
+    const result = component.extractIconName(iconPath);
+    expect(result).toBe(expectedIconName);
+  });
 });
