@@ -7,28 +7,32 @@ describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let darkModeServiceMock: any;
+  let mediaQueryListMock: any;
 
   beforeAll(() => {
     // Mock the matchMedia API globally
+    mediaQueryListMock = {
+      matches: false,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    };
+
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation(query => ({
-        matches: false,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn()
-      }))
+      value: jest.fn().mockImplementation((query) => mediaQueryListMock),
     });
   });
 
   beforeEach(async () => {
     darkModeServiceMock = {
       darkMode$: of(false),
-      setDarkMode: jest.fn()
+      setDarkMode: jest.fn(),
     };
 
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      providers: [{ provide: DarkModeService, useValue: darkModeServiceMock }]
+      providers: [{ provide: DarkModeService, useValue: darkModeServiceMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -42,11 +46,7 @@ describe('HeaderComponent', () => {
 
   it('should initialize with system dark mode preference', () => {
     // Adjust the matchMedia mock to simulate dark mode
-    window.matchMedia = jest.fn().mockImplementation(query => ({
-      matches: true, // Simulate prefers dark mode
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn()
-    }));
+    mediaQueryListMock.matches = true; // Simulate prefers dark mode
 
     component.ngOnInit();
 
@@ -76,7 +76,10 @@ describe('HeaderComponent', () => {
 
   it('should apply dark mode class', () => {
     const addClassSpy = jest.spyOn(document.documentElement.classList, 'add');
-    const removeClassSpy = jest.spyOn(document.documentElement.classList, 'remove');
+    const removeClassSpy = jest.spyOn(
+      document.documentElement.classList,
+      'remove'
+    );
 
     component.applyDarkMode(true);
     expect(addClassSpy).toHaveBeenCalledWith('dark');
@@ -86,14 +89,31 @@ describe('HeaderComponent', () => {
   });
 
   it('should add event listener for system dark mode changes', () => {
-    const addEventListenerSpy = jest.fn();
-    window.matchMedia = jest.fn().mockImplementation(query => ({
-      matches: false,
-      addEventListener: addEventListenerSpy,
-      removeEventListener: jest.fn()
-    }));
+    const addEventListenerSpy = jest.spyOn(
+      mediaQueryListMock,
+      'addEventListener'
+    );
 
     component.ngOnInit();
-    expect(addEventListenerSpy).toHaveBeenCalledWith('change', expect.any(Function));
+    expect(addEventListenerSpy).toHaveBeenCalledWith(
+      'change',
+      expect.any(Function)
+    );
+  });
+
+  it('should handle system dark mode changes', () => {
+    component.ngOnInit();
+
+    // Simulate a change event to dark mode
+    const darkModeEvent = { matches: true } as MediaQueryListEvent;
+    const handler = mediaQueryListMock.addEventListener.mock.calls[0][1];
+    handler(darkModeEvent);
+
+    expect(component.isDarkMode).toBe(true);
+    expect(darkModeServiceMock.setDarkMode).toHaveBeenCalledWith(true);
+
+    // Simulate a change event to light mode
+    const lightModeEvent = { matches: false } as MediaQueryListEvent;
+    handler(lightModeEvent);
   });
 });
