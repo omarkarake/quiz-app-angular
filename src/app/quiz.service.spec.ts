@@ -1,13 +1,14 @@
-import { TestBed } from '@angular/core/testing';
-
 import { QuizService } from './quiz.service';
 
 describe('QuizService', () => {
   let service: QuizService;
+  let httpClientSpy: any;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(QuizService);
+    httpClientSpy = {
+      get: jest.fn()
+    }
+    service = new QuizService(httpClientSpy);
   });
 
   it('should be created', () => {
