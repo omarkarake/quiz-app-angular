@@ -111,4 +111,45 @@ describe('AppComponent', () => {
     const result = component.extractIconName(iconPath);
     expect(result).toBe(expectedIconName);
   });
+
+  it('should reset quiz correctly', () => {
+    // Setup initial state before reset
+    component.quizSelected = true;
+    component.quizCompleted = true;
+    component.selectedQuiz = { title: 'Sample Quiz' };
+    component.selectedIcon = 'icon-sample';
+    component.selectedSubject = 'Sample Quiz';
+    component.score = 85;
+    component.totalQuestions = 3;
+
+    component.resetQuiz();
+    expect(component.quizSelected).toBe(false);
+    expect(component.quizCompleted).toBe(false);
+    expect(component.selectedQuiz).toBeNull();
+    expect(component.selectedIcon).toBeNull();
+    expect(component.selectedSubject).toBeNull();
+    expect(component.score).toBe(0);
+    expect(component.totalQuestions).toBe(0);
+  });
+
+  it('should complete quiz correctly', () => {
+    const score = 85;
+    component.onQuizCompleted(score);
+    expect(component.quizCompleted).toBe(true);
+    expect(component.score).toBe(score);
+  });
+
+  it('should select quiz correctly', () => {
+    const quiz = {
+      title: 'Sample Quiz',
+      icon: 'assets/images/icon-sample.svg',
+      questions: [{}, {}, {}]
+    };
+    component.onQuizSelected(quiz);
+    expect(component.quizSelected).toBe(true);
+    expect(component.selectedQuiz).toBe(quiz);
+    expect(component.totalQuestions).toBe(3);
+    expect(component.selectedIcon).toBe('icon-sample');
+    expect(component.selectedSubject).toBe('Sample Quiz');
+  });
 });
