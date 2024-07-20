@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
     this.darkModeService.setDarkMode(this.isDarkMode);
   }
 
-  private applyDarkMode(isDarkMode: boolean): void {
+  applyDarkMode(isDarkMode: boolean): void {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
     } else {
