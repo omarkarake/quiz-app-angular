@@ -125,4 +125,44 @@ describe('QuestionsComponent', () => {
     expect(component.getOptionLabel(25)).toBe('Z');
     expect(component.getOptionLabel(26)).toBe('['); // Beyond 'Z'
   });
+
+  it('should select an option and reset showError when an option is selected', () => {
+    component.showFeedback = false;
+    component.selectOption(1);
+    expect(component.selectedOption).toBe(1);
+    expect(component.showError).toBeFalsy();
+  });
+
+  it('should not select an option when showFeedback is true', () => {
+    component.showFeedback = true;
+    component.selectOption(1);
+    expect(component.selectedOption).toBeNull();
+  });
+
+  it('should show an error if submitAnswer is called without selecting an option', () => {
+    component.submitAnswer();
+    expect(component.showError).toBeTruthy();
+  });
+
+  it('should evaluate the selected answer correctly and show feedback', () => {
+    const mockQuiz: Quiz = {
+      title: 'Sample Quiz',
+      questions: [
+        { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
+      ],
+    };
+
+    component.quiz = mockQuiz;
+    component.currentQuestionIndex = 0;
+    component.selectOption(0); // Select the correct option
+
+    component.submitAnswer();
+    expect(component.isAnswerCorrect).toBeTruthy();
+    expect(component.showFeedback).toBeTruthy();
+    expect(component.score).toBe(1);
+
+    component.selectOption(1); // Select an incorrect option
+    component.submitAnswer();
+    expect(component.showFeedback).toBeTruthy();
+  });
 });
