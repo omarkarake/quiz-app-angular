@@ -20,4 +20,10 @@ describe('ScoreComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit play again to start the game again', ()=>{
+    const emitSpy = jest.spyOn(component.playAgain, 'emit');
+    component.onPlayAgain();
+    expect(emitSpy).toHaveBeenCalled();
+  })
 });
