@@ -58,3 +58,6 @@ To run this project locally, follow these steps:
 2. Select a quiz topic to get started.
 3. Answer the quiz questions and submit your answers.
 4. View your score and feedback on quiz completion.
+
+## test coverage
+![alt text](image.png)
