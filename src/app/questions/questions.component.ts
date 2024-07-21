@@ -33,9 +33,11 @@ export class QuestionsComponent implements OnInit {
     }
   }
 
-  get rangeValue(): number {
-    const totalQuestions = this.quiz?.questions?.length ?? 1;
-    return (this.currentQuestionIndex / totalQuestions) * 100 + 10;
+  get rangeValue(): any {
+    const totalQuestions = this.quiz?.questions?.length;
+    if (totalQuestions) {
+      return (this.currentQuestionIndex / totalQuestions) * 100 + 10;
+    }
   }
 
   getCurrentQuestion(): Question | null {

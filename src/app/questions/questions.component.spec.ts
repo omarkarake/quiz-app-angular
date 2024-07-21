@@ -18,9 +18,8 @@ describe('QuestionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [QuestionsComponent]
-    })
-    .compileComponents();
+      declarations: [QuestionsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(QuestionsComponent);
     component = fixture.componentInstance;
@@ -36,8 +35,8 @@ describe('QuestionsComponent', () => {
       title: 'Sample Quiz',
       questions: [
         { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
-        { question: 'Question 2', options: ['A', 'B', 'C', 'D'], answer: 'B' }
-      ]
+        { question: 'Question 2', options: ['A', 'B', 'C', 'D'], answer: 'B' },
+      ],
     };
 
     // Act: Assign the mock quiz to the component and call ngOnInit
@@ -52,7 +51,7 @@ describe('QuestionsComponent', () => {
     // Arrange: Create a mock quiz with no questions
     const mockQuiz: Quiz = {
       title: 'Sample Quiz',
-      questions: []
+      questions: [],
     };
 
     // Act: Assign the mock quiz to the component and call ngOnInit
@@ -70,5 +69,30 @@ describe('QuestionsComponent', () => {
 
     // Assert: Check if currentQuestionIndex is set to 0
     expect(component.currentQuestionIndex).toBe(0);
+  });
+
+  it('should calculate rangeValue correctly', () => {
+    const mockQuiz: Quiz = {
+      title: 'Sample Quiz',
+      questions: [
+        { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
+        { question: 'Question 2', options: ['A', 'B', 'C', 'D'], answer: 'B' },
+        { question: 'Question 3', options: ['A', 'B', 'C', 'D'], answer: 'C' },
+      ],
+    };
+
+    component.quiz = mockQuiz;
+
+    component.currentQuestionIndex = 0;
+    expect(component.rangeValue).toBe((0 / 3) * 100 + 10);
+
+    component.currentQuestionIndex = 1;
+    expect(component.rangeValue).toBe((1 / 3) * 100 + 10);
+
+    component.currentQuestionIndex = 2;
+    expect(component.rangeValue).toBe((2 / 3) * 100 + 10);
+
+    component.currentQuestionIndex = 3; // out of bounds, but checking for correctness
+    expect(component.rangeValue).toBe((3 / 3) * 100 + 10);
   });
 });
