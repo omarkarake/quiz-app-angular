@@ -73,14 +73,16 @@ export class QuestionsComponent implements OnInit {
   }
 
   nextQuestion(): void {
-    if (this.currentQuestionIndex < (this.quiz?.questions?.length ?? 0) - 1) {
-      this.currentQuestionIndex++;
-      this.selectedOption = null;
-      this.showError = false;
-      this.showFeedback = false;
-    } else {
-      // Last question, submit quiz
-      this.quizCompleted.emit(this.score);
+    if (this.quiz) {
+      if (this.currentQuestionIndex < this.quiz?.questions?.length - 1) {
+        this.currentQuestionIndex++;
+        this.selectedOption = null;
+        this.showError = false;
+        this.showFeedback = false;
+      } else {
+        // Last question, submit quiz
+        this.quizCompleted.emit(this.score);
+      }
     }
   }
 

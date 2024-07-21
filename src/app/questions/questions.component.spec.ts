@@ -165,4 +165,82 @@ describe('QuestionsComponent', () => {
     component.submitAnswer();
     expect(component.showFeedback).toBeTruthy();
   });
+
+  it('should move to the next question and reset states', () => {
+    const mockQuiz: Quiz = {
+      title: 'Sample Quiz',
+      questions: [
+        { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
+        { question: 'Question 2', options: ['A', 'B', 'C', 'D'], answer: 'B' },
+      ],
+    };
+
+    component.quiz = mockQuiz;
+    component.currentQuestionIndex = 0;
+    component.selectedOption = 1;
+    component.showError = true;
+    component.showFeedback = true;
+
+    component.nextQuestion();
+
+    expect(component.currentQuestionIndex).toBe(1);
+    expect(component.selectedOption).toBeNull();
+    expect(component.showError).toBeFalsy();
+    expect(component.showFeedback).toBeFalsy();
+  });
+
+  it('should emit quizCompleted when last question is answered', () => {
+    const mockQuiz: Quiz = {
+      title: 'Sample Quiz',
+      questions: [
+        { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
+      ],
+    };
+
+    component.quiz = mockQuiz;
+    component.currentQuestionIndex = 0;
+    component.score = 1;
+
+    const emitSpy = jest.spyOn(component.quizCompleted, 'emit');
+    component.nextQuestion();
+
+    expect(emitSpy).toHaveBeenCalledWith(1);
+  });
+
+  it('should return true if the selected option is the correct answer', () => {
+    const mockQuiz: Quiz = {
+      title: 'Sample Quiz',
+      questions: [
+        { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
+      ],
+    };
+
+    component.quiz = mockQuiz;
+    component.currentQuestionIndex = 0;
+
+    expect(component.isCorrectOption(0)).toBeTruthy();
+    expect(component.isCorrectOption(1)).toBeFalsy();
+  });
+
+  it('should return false if current question is null', () => {
+    component.quiz = null;
+    component.currentQuestionIndex = 0;
+
+    expect(component.isCorrectOption(0)).toBeFalsy();
+  });
+
+  it('should return false if index is out of bounds', () => {
+    const mockQuiz: Quiz = {
+      title: 'Sample Quiz',
+      questions: [
+        { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
+      ],
+    };
+
+    component.quiz = mockQuiz;
+    component.currentQuestionIndex = 0;
+
+    expect(component.isCorrectOption(-1)).toBeFalsy(); // Negative index
+    expect(component.isCorrectOption(4)).toBeFalsy(); // Index out of bounds
+  });
 });
