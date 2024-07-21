@@ -95,4 +95,34 @@ describe('QuestionsComponent', () => {
     component.currentQuestionIndex = 3; // out of bounds, but checking for correctness
     expect(component.rangeValue).toBe((3 / 3) * 100 + 10);
   });
+
+  it('should return the current question', () => {
+    const mockQuiz: Quiz = {
+      title: 'Sample Quiz',
+      questions: [
+        { question: 'Question 1', options: ['A', 'B', 'C', 'D'], answer: 'A' },
+        { question: 'Question 2', options: ['A', 'B', 'C', 'D'], answer: 'B' },
+      ],
+    };
+
+    component.quiz = mockQuiz;
+
+    component.currentQuestionIndex = 0;
+    expect(component.getCurrentQuestion()).toEqual(mockQuiz.questions[0]);
+
+    component.currentQuestionIndex = 1;
+    expect(component.getCurrentQuestion()).toEqual(mockQuiz.questions[1]);
+
+    component.currentQuestionIndex = 2;
+    expect(component.getCurrentQuestion()).toBeNull();
+  });
+
+  it('should return the correct option label', () => {
+    expect(component.getOptionLabel(0)).toBe('A');
+    expect(component.getOptionLabel(1)).toBe('B');
+    expect(component.getOptionLabel(2)).toBe('C');
+    expect(component.getOptionLabel(3)).toBe('D');
+    expect(component.getOptionLabel(25)).toBe('Z');
+    expect(component.getOptionLabel(26)).toBe('['); // Beyond 'Z'
+  });
 });
