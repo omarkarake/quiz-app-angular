@@ -1,14 +1,15 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DarkModeService } from './dark-mode.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'quiz-app';
   isDarkMode = false;
   screenSize: 'lg' | 'md' | 'sm' = 'sm'; // Initialize with a default value
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   selectedSubject: string | null = null;
   score = 0;
   totalQuestions = 0;
+  private sub : Subscription = new Subscription();
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -57,7 +59,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Subscribe to dark mode changes
-    this.darkModeService.darkMode$.subscribe((isDarkMode) => {
+    this.sub = this.darkModeService.darkMode$.subscribe((isDarkMode) => {
       this.isDarkMode = isDarkMode;
     });
 
@@ -66,6 +68,10 @@ export class AppComponent implements OnInit {
 
     // Listen to window resize events
     window.addEventListener('resize', this.updateScreenSize.bind(this));
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   @HostListener('window:resize', ['$event'])

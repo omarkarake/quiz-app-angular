@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { QuizService } from '../quiz.service';
+import { Observable, Subscription } from 'rxjs';
 
 interface Question {
   question: string;
@@ -17,7 +18,7 @@ interface Quiz {
   templateUrl: './starter.component.html',
   styleUrls: ['./starter.component.css'],
 })
-export class StarterComponent implements OnInit {
+export class StarterComponent implements OnInit, OnDestroy {
   colors: string[] = ['#FFF1E9', '#E0FDEF', '#EBF0FF', '#F6E7FF'];
 
 getBackgroundColor(index: number): string {
@@ -30,11 +31,18 @@ getBackgroundColor(index: number): string {
 
   constructor(private quizService: QuizService) {}
 
+  private sub: Subscription = new Subscription;
+
   ngOnInit(): void {
-    this.quizService.getQuizzes().subscribe((data) => {
+    this.sub = this.quizService.getQuizzes().subscribe((data) => {
       this.quizzes = data.quizzes;
     });
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 
   onSelectQuiz(quiz: Quiz): void {
     this.quizSelected.emit(quiz);
